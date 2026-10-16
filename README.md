@@ -18,9 +18,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/chain-Robinhood%20Chain%204663-8b5cf6?style=flat-square" alt="Robinhood Chain">
-  <img src="https://img.shields.io/badge/status-pre--launch-8b5cf6?style=flat-square" alt="Pre-launch">
+  <img src="https://img.shields.io/badge/%24OATH-live-8b5cf6?style=flat-square" alt="$OATH live">
   <img src="https://img.shields.io/badge/app-sandbox-8b5cf6?style=flat-square" alt="Sandbox">
-  <img src="https://img.shields.io/badge/team%20supply-0%25-8b5cf6?style=flat-square" alt="Team supply 0%">
+  <img src="https://img.shields.io/badge/launch%20buy-burned-8b5cf6?style=flat-square" alt="Launch buy burned">
 </p>
 
 ![Oath Network landing page](assets/banner.png)
@@ -31,7 +31,7 @@
 
 People now type their most sensitive material into AI: trading plans, wallet lists, contracts before launch, legal drafts, health questions. The service on the other side can read all of it, and its promise not to look is a policy page, not a mechanism.
 
-Oath Network treats privacy that cannot be checked as marketing. So the product is the check itself:
+Oath Network treats privacy that cannot be checked as marketing. So the product is the check itself. This is how it is built to work:
 
 1. Your browser checks the sealed machine before it sends anything.
 2. Your prompt is encrypted to a key that exists only inside that machine.
@@ -42,21 +42,33 @@ Oath Network treats privacy that cannot be checked as marketing. So the product 
 
 The receipt is public. The prompt never is.
 
+> **Today the app runs as a sandbox.** OATH AI answers for real and every answer is signed and witnessed, but the machine is an ordinary server, not sealed hardware yet, and credits and stake are test numbers. Type nothing private until the sealed machine is live. See [Status](#status).
+
 ![The sealed lane](assets/art-sealed.jpg)
 
-**Chain:** Robinhood Chain (EVM, chain id 4663) · **Ticker:** $OATH
+**Chain:** Robinhood Chain (EVM, chain id 4663) · **Ticker:** $OATH · **Contract:** `0xDE97752448FD7d958CAA7749DAE91A6FE14a3133`
 
 ---
 
 ## Features
 
-### Sealed chat
-- Five free sealed answers a day. No wallet, no signup.
+### Sealed chat with OATH AI
+- Ask OATH AI, the assistant of Oath Network. Five free answers a day. No wallet, no signup.
 - The browser checks the machine's proof against the public signer registry before it encrypts the prompt.
 - The prompt is encrypted end to end (X25519, HKDF-SHA256, XChaCha20-Poly1305). The relay in the middle only ever sees ciphertext.
 - No database table holds a prompt or an answer. There is nothing to leak, because it was never written.
 
 ![Sealed chat in the app](assets/app-chat.png)
+
+### Token check
+Paste any token address from Robinhood Chain into the chat and ask about it.
+
+- **Your browser reads the token straight from the chain:** supply, owner, whether it is upgradeable, mint, pause, blacklist or fee-setting functions found in its code, its stage on the launchpad, the creator fee and who receives it, and how much of the supply the deployer, the curve and the burn address hold.
+- **Sell test:** for a coin on the launchpad's curve, the browser simulates a small buy and an immediate sell of everything received. It shows whether selling works, whether the token takes a cut on transfer, and how much ETH comes back. Nothing is sent, signed or paid.
+- **Private by design:** the facts are sealed together with your question, so the relay never sees which token you checked. The receipt covers the facts the answer was given.
+- OATH AI explains the risks from those facts, says what chain data cannot show, and never predicts a price.
+
+![Token check in the app](assets/app-token-check.png)
 
 ### Signed receipts
 Every answer comes with a receipt on its own public page.
@@ -79,7 +91,7 @@ Anyone can press **Check it yourself** on a receipt page and re-run the check in
     <td><img src="assets/app-receipt-fields.png" alt="The eight public fields of a receipt"></td>
   </tr>
   <tr>
-    <td align="center"><sub>Receipt No. 1: answered under oath, 3 of 3 witnesses agreed</sub></td>
+    <td align="center"><sub>A receipt page: answered under oath, 3 of 3 witnesses agreed</sub></td>
     <td align="center"><sub>Eight fields and no words. Check it yourself.</sub></td>
   </tr>
 </table>
@@ -87,6 +99,7 @@ Anyone can press **Check it yourself** on a receipt page and re-run the check in
 ![Every answer leaves a receipt](assets/app-receipts.png)
 
 ### Witness network
+Today the witnesses are house witnesses on test stake. Staking real $OATH opens once the bond contract is deployed.
 
 ![Three witnesses](assets/art-witnesses.jpg)
 
@@ -127,7 +140,9 @@ A public page listing every witness caught signing a forgery: the address, the f
 </table>
 
 ### A vault with no keys
-Every fee, from trading and from usage, lands in one vault with a fixed split and no owner, no pause, no upgrade and no withdraw path.
+Every fee, from trading and from usage, is meant to land in one vault with a fixed split and no owner, no pause, no upgrade and no withdraw path. The vault is deployed: [`0x577401fCea5d2Dc40dd99f13960985cf4B6FC988`](https://robin.etherscan.io/address/0x577401fCea5d2Dc40dd99f13960985cf4B6FC988).
+
+> **Today the token's 2% creator fee goes to the team wallet** [`0xAf2819e31fC853e8AB3909267C7707f27Fc4e833`](https://robin.etherscan.io/address/0xAf2819e31fC853e8AB3909267C7707f27Fc4e833). It will be moved to the vault, and this page will say so when it is.
 
 | Share | Goes to |
 |---|---|
@@ -160,8 +175,10 @@ Each sealed machine creates a random secret at start-up and publishes only its h
   </tr>
 </table>
 
-### $OATH, the bond
-$OATH is the stake a witness puts at risk, not a ticket.
+### $OATH
+$OATH is live on Robinhood Chain: [`0xDE97752448FD7d958CAA7749DAE91A6FE14a3133`](https://robin.etherscan.io/token/0xDE97752448FD7d958CAA7749DAE91A6FE14a3133). It launched on the Robinhood Chain launchpad and trades on its bonding curve, paired with ETH.
+
+It is meant to be the stake a witness puts at risk, not a ticket. The tiers below open once the sealed chat and the bond contract are live; holding $OATH unlocks nothing yet.
 
 | Tier | Requirement | Opens |
 |---|---|---|
@@ -173,20 +190,20 @@ What the token can never do: buy a different answer, buy a ruling, skip an audit
 
 ![Tiers and what the token may never do](assets/site-tiers.png)
 
-**Fair launch.** 1,000,000,000 supply, fixed, no mint. The team holds no supply: no allocation, no presale, no dev buy.
+**Fair launch.** 1,000,000,000 supply, fixed, no mint, no presale, no team allocation. The launch transaction bought 29.4M $OATH, and all of it was sent to the burn address. The launch wallet holds none.
 
 ### Smart contracts
-Seven Solidity contracts for Robinhood Chain, none with an owner over money:
+Seven Solidity contracts for Robinhood Chain, none with an owner over money. Six are deployed:
 
-| Contract | Role |
-|---|---|
-| `OathVault` | Receives every fee and splits it 40/30/20/10 |
-| `OathBurner` | Buys $OATH back and burns it |
-| `WitnessBond` | Stake, the 7-day exit, and cuts proven by a signed forgery |
-| `WitnessPay` | Hourly pay epochs, published with a public delay |
-| `BreachPot` | Pays whoever reveals a sealed machine's start-up secret |
-| `SignerRegistry` | Which machine keys and code fingerprints count |
-| `ReceiptLog` | One root per batch of witnessed receipts |
+| Contract | Role | Address |
+|---|---|---|
+| `SignerRegistry` | Which machine keys and code fingerprints count. Held by a cold operator wallet | [`0x1EBB…7A82`](https://robin.etherscan.io/address/0x1EBBcfa909E4b1690b815FD367710A6257eF7A82) |
+| `ReceiptLog` | One root per batch of witnessed receipts | [`0xc60d…6275`](https://robin.etherscan.io/address/0xc60df65e8efc52F76ada607C2a497D9Dd4B46275) |
+| `BreachPot` | Pays whoever reveals a sealed machine's start-up secret | [`0x1254…6845`](https://robin.etherscan.io/address/0x12540a5C6b67679dA117Dc2194a1151C64426845) |
+| `WitnessPay` | Hourly pay epochs, published with a public delay | [`0x618E…825e`](https://robin.etherscan.io/address/0x618E5451075c5d6bcCf2f64266631A135Ac0825e) |
+| `OathVault` | Splits every fee 40/30/20/10 once the fee reaches it | [`0x5774…C988`](https://robin.etherscan.io/address/0x577401fCea5d2Dc40dd99f13960985cf4B6FC988) |
+| `OathBurner` | Buys $OATH back and burns it | [`0xF39c…56f3`](https://robin.etherscan.io/address/0xF39cD7Bf125b5D8Dd6F46C75f74715641f3056f3) |
+| `WitnessBond` | Stake, the 7-day exit, and cuts proven by a signed forgery | Not deployed yet |
 
 ### On every screen
 The app and the site are built for a phone first.
@@ -206,6 +223,8 @@ Everything above, in full, at [oathnetwork.tech/docs](https://oathnetwork.tech/d
 
 **It does not mean** "cannot be broken". Enclaves rest on the chip maker, and published research has broken them with physical access to the server. We say hardware-attested, never more. A signed answer proves where it came from, not that it is true. And paying from a wallet is public on chain.
 
+**The sealed machine is written, not running.** Its code runs the machine inside a confidential VM with no shell, where a signed attestation names the exact container image, and the browser checks that attestation before it seals anything. Until it runs, the app says "Sandbox" on every screen.
+
 **v1 is not decentralised.** The coordinator is ours. We can delay or refuse an answer and choose which models are offered. We cannot pick the witnesses, cut a stake by decree, or move the vault's fees.
 
 ---
@@ -215,17 +234,17 @@ Everything above, in full, at [oathnetwork.tech/docs](https://oathnetwork.tech/d
 | Part | State |
 |---|---|
 | Website and docs | Live at [oathnetwork.tech](https://oathnetwork.tech) |
-| App | Live at [app.oathnetwork.tech](https://app.oathnetwork.tech) as a **sandbox**: test credits, test stake, house witnesses. No model is connected yet, so answers are a fixed sentence. The sealed channel, the signed receipt and the witness check work as they will. |
-| In-browser hardware attestation verifier | Not built yet |
-| Contracts | Written and tested on a fork, **not deployed** |
-| $OATH | **Does not exist yet.** Product first, token after. Any "$OATH" address shared today is not ours. |
+| App | Live at [app.oathnetwork.tech](https://app.oathnetwork.tech) as a **sandbox**: OATH AI answers for real, every answer is signed and checked by 3 witnesses, token check with sell test works. Credits and stake are test numbers, the witnesses are house witnesses, and the machine is not sealed hardware yet. |
+| Sealed machine and its browser check | Written and tested, not running yet |
+| $OATH | **Live** at `0xDE97752448FD7d958CAA7749DAE91A6FE14a3133`, on the launchpad's bonding curve |
+| Creator fee | 2%, goes to the team wallet for now, to be moved to the vault |
+| Contracts | Six deployed (see above). The witness bond is not deployed yet |
+| Holder tier, staking, witness pay | Not live yet |
 
-![The token does not exist yet](assets/site-status.png)
-
-Official channels are X, GitHub and the docs. Nothing else is ours.
+Official channels are X, GitHub and the docs. Nothing else is ours. The only $OATH contract is `0xDE97752448FD7d958CAA7749DAE91A6FE14a3133`.
 
 ---
 
 ## Disclaimer
 
-Oath Network is experimental software. Nothing here is financial advice or a promise of returns. $OATH is the stake that lets a witness work, and it can be cut.
+Oath Network is experimental software. Nothing here is financial advice or a promise of returns. $OATH is meant to be the stake that lets a witness work, and a stake can be cut. The token check reports public chain data and one small simulated trade; it cannot promise a token is safe.
